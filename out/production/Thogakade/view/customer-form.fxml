@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="474.0" prefWidth="600.0" style="-fx-background-color: #1abc9c; -fx-background-radius: 20; -fx-border-color: #2d3436;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerController">
+   <children>
+      <Button layoutX="454.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="36.0" prefWidth="78.0" text="Cancel" />
+      <TextField fx:id="txtId" alignment="CENTER" layoutX="61.0" layoutY="144.0" prefHeight="36.0" prefWidth="103.0" promptText="ID" style="-fx-background-radius: 20; -fx-background-color: #747d8c; -fx-border-color: #fab1a0; -fx-border-radius: 20;">
+         <font>
+            <Font name="System Bold" size="13.600000381469727" />
+         </font>
+      </TextField>
+      <Button layoutX="366.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="36.0" prefWidth="70.0" text="ADD" />
+      <TextField fx:id="txtSalary" alignment="CENTER" layoutX="61.0" layoutY="315.0" prefHeight="36.0" prefWidth="162.0" promptText="Salary" style="-fx-background-radius: 20; -fx-background-color: #747d8c; -fx-border-color: #fab1a0; -fx-border-radius: 20;">
+         <font>
+            <Font name="System Bold" size="13.600000381469727" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtName" alignment="CENTER" layoutX="61.0" layoutY="201.0" prefHeight="36.0" prefWidth="224.0" promptText="Name" style="-fx-background-radius: 20; -fx-background-color: #747d8c; -fx-border-color: #fab1a0; -fx-border-radius: 20;">
+         <font>
+            <Font name="System Bold" size="13.600000381469727" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtAddress" alignment="CENTER" layoutX="61.0" layoutY="255.0" prefHeight="36.0" prefWidth="234.0" promptText="Address" style="-fx-background-radius: 20; -fx-background-color: #747d8c; -fx-border-color: #fab1a0; -fx-border-radius: 20;">
+         <font>
+            <Font name="System Bold" size="13.600000381469727" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="104.0" layoutY="16.0" prefHeight="61.0" prefWidth="374.0" style="-fx-background-color: #f7d794;" text="Add Customer Form" textFill="#762d2d">
+         <font>
+            <Font name="Arial Narrow" size="43.0" />
+         </font>
+      </Label>
+   </children>
+   <effect>
+      <Lighting diffuseConstant="1.28" specularConstant="0.34" specularExponent="32.71" surfaceScale="1.31">
+         <bumpInput>
+            <Shadow />
+         </bumpInput>
+         <light>
+            <Light.Distant />
+         </light>
+      </Lighting>
+   </effect>
+</AnchorPane>
