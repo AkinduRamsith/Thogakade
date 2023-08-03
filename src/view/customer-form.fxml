@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -242,29 +246,51 @@
                 </Lighting>
             </effect>
         </AnchorPane>
-        <AnchorPane fx:id="anpDashBoard" layoutX="323.0" layoutY="198.0" prefHeight="724.6" prefWidth="921.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="anpDashBoard" layoutY="7.0" prefHeight="724.6" prefWidth="921.8" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
             <children>
                 <AnchorPane layoutX="243.0" layoutY="106.0" prefHeight="725.0" prefWidth="275.0" style="-fx-background-color: #192a56;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="647.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="14.0" prefHeight="66.0" prefWidth="262.0" text="ThogaKade" textFill="#f2f1f1">
-                            <font>
-                                <Font name="Bernard MT Condensed" size="37.0" />
-                            </font>
-                        </Label>
                         <Button layoutX="4.0" layoutY="130.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="46.0" prefWidth="266.0" style="-fx-background-color: #192a56;" text="Customers" textFill="#f4efef">
                             <font>
                                 <Font name="Book Antiqua Bold" size="29.0" />
                             </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
                         </Button>
                         <Button layoutX="4.0" layoutY="294.0" mnemonicParsing="false" onAction="#btnOrderOnAction" prefHeight="46.0" prefWidth="266.0" style="-fx-background-color: #192a56;" text="Orders" textFill="#f7f6f6">
                             <font>
                                 <Font name="Book Antiqua Bold" size="29.0" />
                             </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
                         </Button>
                         <Button layoutX="4.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="46.0" prefWidth="266.0" style="-fx-background-color: #192a56;" text="Items" textFill="#faf9f9">
                             <font>
                                 <Font name="Book Antiqua Bold" size="29.0" />
                             </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button fx:id="btnHome" layoutX="-16.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="75.0" prefWidth="285.0" style="-fx-background-color: #192a56;" text="Thogakade" textFill="#fcf7f7">
+                            <font>
+                                <Font name="Bernard MT Condensed" size="39.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <graphic>
+                                <ImageView fitHeight="56.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../img/home.png" />
+                                    </image>
+                                    <effect>
+                                        <ColorAdjust brightness="1.0" saturation="0.08" />
+                                    </effect>
+                                </ImageView>
+                            </graphic>
                         </Button>
                     </children>
                 </AnchorPane>
@@ -273,9 +299,48 @@
                         <Font name="Bodoni MT Bold" size="50.0" />
                     </font>
                 </Label>
-                <AnchorPane layoutX="317.0" layoutY="148.0" prefHeight="199.0" prefWidth="166.0" style="-fx-background-color: #82ccdd; -fx-background-radius: 15;" />
-                <AnchorPane layoutX="531.0" layoutY="148.0" prefHeight="199.0" prefWidth="166.0" style="-fx-background-color: #82ccdd; -fx-background-radius: 15;" />
-                <AnchorPane layoutX="729.0" layoutY="148.0" prefHeight="199.0" prefWidth="166.0" style="-fx-background-color: #82ccdd; -fx-background-radius: 15;" />
+                <AnchorPane layoutX="317.0" layoutY="148.0" prefHeight="199.0" prefWidth="166.0" style="-fx-background-color: #82ccdd; -fx-background-radius: 15;">
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="22.0" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #079992;" text="Customers" textAlignment="CENTER" textFill="#ece4e4">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblCustomerCount" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="87.0" prefHeight="66.0" prefWidth="122.0">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="531.0" layoutY="148.0" prefHeight="199.0" prefWidth="166.0" style="-fx-background-color: #82ccdd; -fx-background-radius: 15;">
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="25.0" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #079992;" text="Items" textAlignment="CENTER" textFill="#ece4e4">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblItemCount" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="90.0" prefHeight="46.0" prefWidth="112.0">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="729.0" layoutY="148.0" prefHeight="199.0" prefWidth="166.0" style="-fx-background-color: #82ccdd; -fx-background-radius: 15;">
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="29.0" prefHeight="43.0" prefWidth="135.0" style="-fx-background-color: #079992;" text="Orders" textAlignment="CENTER" textFill="#ece4e4">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblOrderCount" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="90.0" prefHeight="46.0" prefWidth="112.0">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="anpItem" layoutX="322.0" layoutY="199.0" prefHeight="732.6" prefWidth="923.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -367,10 +432,10 @@
                 <AnchorPane fx:id="anpItemUpdateForm" layoutX="265.0" layoutY="45.0" prefHeight="686.0" prefWidth="658.0" style="-fx-background-color: #f5f6fa;" visible="false">
                     <children>
                         <TextField fx:id="txtItemUpdateSearch" layoutX="284.0" layoutY="124.0" onAction="#txtItemUpdateSearchOnAction" prefHeight="30.0" prefWidth="192.0" promptText="search" />
-                        <TextField fx:id="txtItemUpdateDescription" layoutX="108.0" layoutY="251.0" prefHeight="42.0" prefWidth="200.0" promptText="Name" text="Description" />
-                        <TextField fx:id="txtItemUpdateCode" layoutX="108.0" layoutY="195.0" prefHeight="42.0" prefWidth="200.0" promptText="Id" text="Code" />
-                        <TextField fx:id="txtItemUpdateUnitPrice" layoutX="108.0" layoutY="309.0" prefHeight="42.0" prefWidth="200.0" promptText="Address" text="Unit Price" />
-                        <TextField fx:id="txtItemUpdateQtyOnHand" layoutX="108.0" layoutY="366.0" prefHeight="42.0" prefWidth="200.0" promptText="Salary" text="Qty On Hand" />
+                        <TextField fx:id="txtItemUpdateDescription" layoutX="108.0" layoutY="251.0" prefHeight="42.0" prefWidth="200.0" promptText="Description" />
+                        <TextField fx:id="txtItemUpdateCode" layoutX="108.0" layoutY="195.0" prefHeight="42.0" prefWidth="200.0" promptText="Code" />
+                        <TextField fx:id="txtItemUpdateUnitPrice" layoutX="108.0" layoutY="309.0" prefHeight="42.0" prefWidth="200.0" promptText="Unit Price" />
+                        <TextField fx:id="txtItemUpdateQtyOnHand" layoutX="108.0" layoutY="366.0" prefHeight="42.0" prefWidth="200.0" promptText="Qty On Hand" />
                         <Button layoutX="503.0" layoutY="124.0" mnemonicParsing="false" onAction="#btnItemUpdateSearchOnAction" text="Search" />
                         <Button layoutX="231.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnItemUpdateOnAction" text="Update" />
                         <Button layoutX="380.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnItemUpdateCancelOnAction" text="Cancel" />
@@ -410,7 +475,7 @@
                         <TextField fx:id="txtItemSearchCode" editable="false" layoutX="94.0" layoutY="203.0" prefHeight="30.0" prefWidth="200.0" promptText="Code" />
                         <TextField fx:id="txtItemSearchDescription" editable="false" layoutX="94.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0" promptText="Description" />
                         <TextField fx:id="txtItemSearchUnitPrice" editable="false" layoutX="94.0" layoutY="299.0" prefHeight="30.0" prefWidth="200.0" promptText="Unit Price" />
-                        <TextField fx:id="txtitemSearchQtyOnHand" editable="false" layoutX="94.0" layoutY="359.0" prefHeight="30.0" prefWidth="200.0" promptText="Qty On Hand" />
+                        <TextField fx:id="txtItemSearchQtyOnHand" editable="false" layoutX="94.0" layoutY="359.0" prefHeight="30.0" prefWidth="200.0" promptText="Qty On Hand" />
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="anpItemDeleteForm" layoutX="265.0" layoutY="45.0" prefHeight="686.0" prefWidth="658.0" visible="false">
@@ -471,7 +536,7 @@
                         </Label>
                         <TableView fx:id="tblViewItem" layoutX="16.0" layoutY="98.0" prefHeight="462.0" prefWidth="632.0" style="-fx-border-color: #1e272e;" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="98.0">
                             <columns>
-                                <TableColumn fx:id="colitemCode" prefWidth="75.0" text="Code" />
+                                <TableColumn fx:id="colItemCode" prefWidth="75.0" text="Code" />
                                 <TableColumn fx:id="colItemDescription" prefWidth="75.0" text="Description" />
                                 <TableColumn fx:id="colItemUnitPrice" prefWidth="75.0" text="Unit Price" />
                                 <TableColumn fx:id="colItemQtyOnHand" prefWidth="75.0" text="Qty On Hand" />

@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -56,11 +58,31 @@ public class CustomerController extends Component implements Initializable {
     public TextField txtItemCode;
     public TextField txtItemUnitPrice;
     public TextField txtItemQtyOnHand;
-    public AnchorPane anpItem;
+    public Button btnHome;
+    public Label lblCustomerCount;
+    public Label lblItemCount;
+    public Label lblOrderCount;
+    @FXML
+    private AnchorPane anpItem;
     public AnchorPane anpItemUpdateForm;
     public AnchorPane anpSearchItemForm;
     public AnchorPane anpItemDeleteForm;
     public AnchorPane anpViewItemForm;
+    public TextField txtItemUpdateSearch;
+    public TextField txtItemUpdateDescription;
+    public TextField txtItemUpdateCode;
+    public TextField txtItemUpdateUnitPrice;
+    public TextField txtItemUpdateQtyOnHand;
+    public TextField txtItemSearch;
+    public TextField txtItemSearchCode;
+    public TextField txtItemSearchDescription;
+    public TextField txtItemSearchUnitPrice;
+    public TextField txtItemSearchQtyOnHand;
+    public TextField txtItemDeleteSearch;
+    public TextField txtItemDeleteCode;
+    public TextField txtItemDeleteDescription;
+    public TextField txtItemDeleteUnitPrice;
+    public TextField txtItemDeleteQtyOnHand;
 
     @FXML
     private TableColumn<Customer, String> colCustomerAddress;
@@ -77,7 +99,24 @@ public class CustomerController extends Component implements Initializable {
     @FXML
     private TableView<Customer> tblViewCustomer;
 
+    @FXML
+    private TableColumn<Item, String> colItemDescription;
+
+    @FXML
+    private TableColumn<Item, Integer> colItemQtyOnHand;
+
+    @FXML
+    private TableColumn<Item, Double> colItemUnitPrice;
+
+    @FXML
+    private TableColumn<Item, String> colItemCode;
+
+
+    @FXML
+    private TableView<Item> tblViewItem;
+
     ObservableList<Customer> list = FXCollections.observableArrayList();
+    ObservableList<Item> listItem = FXCollections.observableArrayList();
 
 
     public void btnCancelOnAction(ActionEvent actionEvent) {
@@ -418,10 +457,16 @@ public class CustomerController extends Component implements Initializable {
         colCustomerAddress.setCellValueFactory(new PropertyValueFactory<Customer, String>("address"));
         colCustomerSalary.setCellValueFactory(new PropertyValueFactory<Customer, Double>("salary"));
         tblViewCustomer.setItems(list);
+
+        colItemCode.setCellValueFactory(new PropertyValueFactory<Item,String>("code"));
+        colItemDescription.setCellValueFactory(new PropertyValueFactory<Item,String>("description"));
+        colItemUnitPrice.setCellValueFactory(new PropertyValueFactory<Item,Double>("unitPrice"));
+        colItemQtyOnHand.setCellValueFactory(new PropertyValueFactory<Item,Integer>("qtyOnHand"));
+        tblViewItem.setItems(listItem);
     }
 
     public void btnAddItemFormOnAction(ActionEvent actionEvent) {
-        anpItem.setVisible(false);
+
         anpItemAddForm.setVisible(true);
         anpItemUpdateForm.setVisible(false);
         anpSearchItemForm.setVisible(false);
@@ -476,19 +521,40 @@ public class CustomerController extends Component implements Initializable {
     }
 
     public void btnUpdateItemFormOnAction(ActionEvent actionEvent) {
+        anpItemAddForm.setVisible(false);
+        anpItemUpdateForm.setVisible(true);
+        anpSearchItemForm.setVisible(false);
+        anpItemDeleteForm.setVisible(false);
+        anpViewItemForm.setVisible(false);
+
     }
 
     public void btnSearchItemFormOnAction(ActionEvent actionEvent) {
+        anpItemAddForm.setVisible(false);
+        anpItemUpdateForm.setVisible(false);
+        anpSearchItemForm.setVisible(true);
+        anpItemDeleteForm.setVisible(false);
+        anpViewItemForm.setVisible(false);
     }
 
     public void btnDeleteItemFormOnAction(ActionEvent actionEvent) {
+        anpItemAddForm.setVisible(false);
+        anpItemUpdateForm.setVisible(false);
+        anpSearchItemForm.setVisible(false);
+        anpItemDeleteForm.setVisible(true);
+        anpViewItemForm.setVisible(false);
     }
 
     public void btnViewItemFormOnAction(ActionEvent actionEvent) {
+        anpItemAddForm.setVisible(false);
+        anpItemUpdateForm.setVisible(false);
+        anpSearchItemForm.setVisible(false);
+        anpItemDeleteForm.setVisible(false);
+        anpViewItemForm.setVisible(true);
     }
 
     public void btnBackItem(ActionEvent actionEvent) {
-        anpItemAddForm.setVisible(false);
+        anpItemAddForm.setVisible(true);
         anpItemDeleteForm.setVisible(false);
         anpSearchItemForm.setVisible(false);
         anpItemUpdateForm.setVisible(false);
@@ -501,41 +567,218 @@ public class CustomerController extends Component implements Initializable {
         txtItemDescription.setText("");
         txtItemUnitPrice.setText("");
         txtItemQtyOnHand.setText("");
+
+
+        txtItemUpdateSearch.setText("");
+        txtItemUpdateCode.setText("");
+        txtItemUpdateDescription.setText("");
+        txtItemUpdateUnitPrice.setText("");
+        txtItemUpdateQtyOnHand.setText("");
+
+
+        txtItemSearch.setText("");
+        txtItemSearchCode.setText("");
+        txtItemSearchDescription.setText("");
+        txtItemSearchUnitPrice.setText("");
+        txtItemSearchQtyOnHand.setText("");
+
+        txtItemDeleteSearch.setText("");
+        txtItemDeleteCode.setText("");
+        txtItemDeleteDescription.setText("");
+        txtItemDeleteUnitPrice.setText("");
+        txtItemDeleteQtyOnHand.setText("");
     }
 
-    public void txtItemUpdateSearchOnAction(ActionEvent actionEvent) {
+    public void txtItemUpdateSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        Statement stm = connection.createStatement();
+        String SQL = "Select * From Item where code='" + txtItemUpdateSearch.getText() + "'";
+        ResultSet rst = stm.executeQuery(SQL);
+        if (rst.next()) {
+            txtItemUpdateCode.setText(rst.getString("code"));
+            txtItemUpdateDescription.setText(rst.getString("description"));
+            txtItemUpdateUnitPrice.setText(String.valueOf(rst.getDouble("unitPrice")));
+            txtItemUpdateQtyOnHand.setText(String.valueOf(rst.getInt("qtyOnHand")));
+        }
+
     }
 
     public void btnItemUpdateSearchOnAction(ActionEvent actionEvent) {
+        try {
+            txtItemUpdateSearchOnAction(actionEvent);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void btnItemUpdateOnAction(ActionEvent actionEvent) {
+    public void btnItemUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String code = txtItemUpdateCode.getText();
+        String description = txtItemUpdateDescription.getText();
+        double unitPrice = Double.parseDouble(txtItemUpdateUnitPrice.getText());
+        int qtyOnHand = Integer.parseInt(txtItemUpdateQtyOnHand.getText());
+        Item item = new Item(code, description, unitPrice, qtyOnHand);
+        String SQL = "Update Item set description=?,unitPrice=?,qtyOnHand=? where code=?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(SQL);
+        pstm.setObject(1, description);
+        pstm.setObject(2, unitPrice);
+        pstm.setObject(3, qtyOnHand);
+        pstm.setObject(4, code);
+        int i = pstm.executeUpdate();
+        if (i > 0) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Updating");
+            alert.setHeaderText(null);
+            alert.setContentText("Update Success");
+            alert.showAndWait();
+
+
+            txtItemUpdateSearch.setText("");
+            txtItemUpdateCode.setText("");
+            txtItemUpdateDescription.setText("");
+            txtItemUpdateUnitPrice.setText("");
+            txtItemUpdateQtyOnHand.setText("");
+        }
     }
 
     public void btnItemUpdateCancelOnAction(ActionEvent actionEvent) {
+        anpItem.setVisible(false);
+        anpDashBoard.setVisible(true);
+        txtItemUpdateSearch.setText("");
+        txtItemUpdateCode.setText("");
+        txtItemUpdateDescription.setText("");
+        txtItemUpdateUnitPrice.setText("");
+        txtItemUpdateQtyOnHand.setText("");
     }
 
-    public void btnItemSearchOnAction(ActionEvent actionEvent) {
+    public void btnItemSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        txtItemSearchOnAction(actionEvent);
     }
 
     public void btnItemSearchCancelOnAction(ActionEvent actionEvent) {
+        anpItem.setVisible(false);
+        anpDashBoard.setVisible(true);
+        txtItemSearch.setText("");
+        txtItemSearchCode.setText("");
+        txtItemSearchDescription.setText("");
+        txtItemSearchUnitPrice.setText("");
+        txtItemSearchQtyOnHand.setText("");
     }
 
-    public void txtItemSearchOnAction(ActionEvent actionEvent) {
+    public void txtItemSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        Statement stm = connection.createStatement();
+        String SQL = "Select * From Item where code='" + txtItemSearch.getText() + "'";
+        ResultSet rst = stm.executeQuery(SQL);
+        if (rst.next()) {
+            txtItemSearchCode.setText(rst.getString("code"));
+            txtItemSearchDescription.setText(rst.getString("description"));
+            txtItemSearchUnitPrice.setText(String.valueOf(rst.getDouble("unitPrice")));
+            txtItemSearchQtyOnHand.setText(String.valueOf(rst.getInt("qtyOnHand")));
+        }
     }
 
-    public void txtItemDeleteSearchOnAction(ActionEvent actionEvent) {
+    public void txtItemDeleteSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        Statement stm = connection.createStatement();
+        String SQL = "Select * From Item where code='" + txtItemDeleteSearch.getText() + "'";
+        ResultSet rst = stm.executeQuery(SQL);
+        if (rst.next()) {
+            txtItemDeleteCode.setText(rst.getString("code"));
+            txtItemDeleteDescription.setText(rst.getString("description"));
+            txtItemDeleteUnitPrice.setText(String.valueOf(rst.getDouble("unitPrice")));
+            txtItemDeleteQtyOnHand.setText(String.valueOf(rst.getInt("qtyOnHand")));
+        } else {
+            txtItemDeleteSearch.setText("");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Searching");
+            alert.setHeaderText(null);
+            alert.setContentText("Customer not Found");
+            alert.showAndWait();
+        }
     }
 
-    public void btnItemDeleteSearchOnAction(ActionEvent actionEvent) {
+    public void btnItemDeleteSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        txtItemDeleteSearchOnAction(actionEvent);
     }
 
-    public void btnItemDeleteOnAction(ActionEvent actionEvent) {
+    public void btnItemDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String code = txtItemDeleteSearch.getText();
+        String SQL = "Delete From Item where code='" + code + "'";
+        Connection connection = DBConnection.getInstance().getConnection();
+        Statement stm = connection.createStatement();
+        int i = stm.executeUpdate(SQL);
+        if (i > 0) {
+            System.out.println(i);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Deleting");
+            alert.setHeaderText(null);
+            alert.setContentText("Delete Success");
+            alert.showAndWait();
+
+            txtItemDeleteSearch.setText("");
+            txtItemDeleteCode.setText("");
+            txtItemDeleteDescription.setText("");
+            txtItemDeleteUnitPrice.setText("");
+            txtItemDeleteQtyOnHand.setText("");
+        }
     }
 
     public void btnItemDeleteCancelOnAction(ActionEvent actionEvent) {
+        anpItem.setVisible(false);
+        anpDashBoard.setVisible(true);
+        txtItemDeleteSearch.setText("");
+        txtItemDeleteCode.setText("");
+        txtItemDeleteDescription.setText("");
+        txtItemDeleteUnitPrice.setText("");
+        txtItemDeleteQtyOnHand.setText("");
     }
 
-    public void btnViewItemReloadOnAction(ActionEvent actionEvent) {
+    public void btnViewItemReloadOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        listItem.clear();
+        String SQL = "Select * From Item";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(SQL);
+        ResultSet rst = pstm.executeQuery();
+
+        while (rst.next()) {
+            Item item = new Item(rst.getString("code"), rst.getString("description"), rst.getDouble("unitPrice"), rst.getInt("qtyOnHand"));
+            listItem.add(item);
+        }
+    }
+
+    public void btnHomeOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String SQL1="Select Count(*) AS customerCount From Customer";
+        String SQL2="Select Count(*) AS itemCount From Item";
+        String SQL3="Select Count(*) AS orderCount From Orders";
+
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement pstm1 = connection.prepareStatement(SQL1);
+        ResultSet rst1 = pstm1.executeQuery();
+        int customerCount=0;
+        while(rst1.next()){
+            customerCount = rst1.getInt("customerCount");
+        }
+        lblCustomerCount.setText(String.valueOf(customerCount));
+        rst1.beforeFirst();
+
+        PreparedStatement pstm2 = connection.prepareStatement(SQL2);
+        ResultSet rst2 = pstm2.executeQuery();
+        int itemCount = 0;
+        if (rst2.next()) {
+            itemCount = rst2.getInt("itemCount");
+        }
+        lblItemCount.setText(String.valueOf(itemCount));
+
+        PreparedStatement pstm3 = connection.prepareStatement(SQL3);
+        ResultSet rst3 = pstm3.executeQuery();
+        int orderCount = 0;
+        if (rst3.next()) {
+            orderCount = rst3.getInt("orderCount");
+        }
+        lblOrderCount.setText(String.valueOf(orderCount));
     }
 }
